@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wash & Go Car Wash </title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Header Styling */
+        .header {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        /* About Us Section */
+        .about-us {
+            background-color: white;
+            color: #01172c;
+            text-align: center;
+            padding: 20px 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .about-us h1 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .about-us p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Image Section */
+        .image-section {
+            background-color: #01172c;
+            text-align: center;
+            padding: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Font Style */
+        .poppins-light {
+            font-family: "Poppins", serif;
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        /* Product Card Styling */
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            /* Makes the cards align in a row */
+            flex-direction: row;
+            /* Aligns items horizontally */
+            justify-content: center;
+            /* Centers the cards */
+            align-items: flex-start;
+            gap: 20px;
+            /* Space between cards */
+            flex-wrap: wrap;
+            /* Allows wrapping on smaller screens */
+            margin-top: 20px;
+        }
+
+        .container .card {
+            position: relative;
+            width: 200px;
+            height: 350px;
+            background: #01172c;
+            border-radius: 20px;
+            overflow: hidden;
+            z-index: 1;
+            /* Lower z-index for the cards */
+        }
+
+
+        .container .card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #01172c;
+            clip-path: circle(150px at 80% 20%);
+            transition: 0.5s ease-in-out;
+        }
+
+        .container .card:hover:before {
+            clip-path: circle(300px at 80% -20%);
+        }
+
+        .container .card:after {
+            content: "Wash";
+            position: absolute;
+            top: 30%;
+            left: -20%;
+            font-size: 12em;
+            font-weight: 800;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.04);
+        }
+
+        .container .card .imgBx {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            width: 100%;
+            height: 100%;
+            transition: .5s;
+        }
+
+        .container .card:hover .imgBx {
+            top: 0%;
+            transform: translateY(-25%);
+        }
+
+        .container .card .imgBx img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(3deg);
+            width: 230px;
+        }
+
+        .container .card .contentBx {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            text-align: center;
+            transition: 1s;
+            z-index: 90;
+        }
+
+        .container .card:hover .contentBx {
+            height: 210px;
+        }
+
+        .container .card .contentBx h2 {
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .container .card .contentBx .size,
+        .container .card .contentBx .color {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px 20px;
+            transition: .5s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .container .card:hover .contentBx .size {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: .5s;
+        }
+
+        .container .card:hover .contentBx .color {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: .6s;
+        }
+
+        .container .card .contentBx .size h3,
+        .container .card .contentBx .color h3 {
+            color: white;
+            font-weight: 300;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-right: 10px;
+        }
+
+        .container .card .contentBx .size span {
+            width: 26px;
+            height: 26px;
+            text-align: center;
+            line-height: 26px;
+            font-size: 14px;
+            display: inline-block;
+            color: #111;
+            background: #fff;
+            margin: 0 5px;
+            transition: .5s;
+            color: #111;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .container .card .contentBx .size span:hover {
+            background: #B90000;
+        }
+
+        .container .card .contentBx a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #fff;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            color: #111;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: .5s;
+        }
+
+        .container .card:hover .contentBx a {
+            opacity: 1;
+            transform: translateY(0px);
+            transition-delay: .7s;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* For screens smaller than 768px (tablets and phones) */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container .card {
+                width: 90%;
+                /* Set card width to 90% to allow proper fitting */
+                margin-bottom: 20px;
+                /* Adds space between cards */
+                height: auto;
+                /* Adjusts height to content */
+            }
+
+            .container .card .imgBx img {
+                width: 80%;
+                /* Reduces image width for smaller screens */
+            }
+        }
+
+
+        #scheduleModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            /* Set a high z-index for the modal */
+        }
+
+
+        #scheduleModalContent {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        #scheduleModalContent button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .confirm-btn {
+            background-color: #01172c;
+            color: white;
+        }
+
+        .cancel-btn {
+            background-color: #B90000;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="Home.png" alt="Home">
+
+    <!-- Header with Links -->
+    <div class="header">
+        <a href="#" class="poppins-light">Home</a>
+        <a href="#about-us" class="poppins-light">About Us</a>
+        <a href="#services" class="poppins-light">Services</a>
+
+    </div>
+
+    <!-- About Us Section -->
+    <section id="about-us" class="image-section">
+        <img src="about.png" alt="About Us">
+    </section>
+
+
+    <!-- Location Section -->
+    <section class="image-section">
+        <img src="loc.png" alt="Location">
+    </section>
+
+    <!-- Service Offerings Panel -->
+    <div id="services" class="service-panel" style="width: 100%; background-color: #f4f4f4; border-radius: 15px;">
+        <h2 style="text-align: center; margin-bottom: 20px; font-size: 50px; margin-top: 50px;">
+            What we offer cleaning service
+        </h2>
+        <!-- Cards Panel Container -->
+        <div class="cards-panel" style="margin-bottom: 40px; border-radius: 10px; width: 100%;">
+            <div class="container">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="imgBx">
+                        <img src="motor.png" alt="motorcycle">
+                    </div>
+                    <div class="contentBx">
+                        <h2>Motorcycle</h2>
+                        <div class="size">
+                            <h3>Size :</h3>
+                            <span>S</span><span>M</span>
+                        </div>
+                        <a href="javascript:void(0);" onclick="openModal('motorcycle')">Schedule Now</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="imgBx">
+                        <img src="car.png" alt="car">
+                    </div>
+                    <div class="contentBx">
+                        <h2>Car</h2>
+                        <div class="size">
+                            <h3>Size :</h3>
+                            <span>S</span><span>M</span><span>B</span>
+                        </div>
+                        <a href="javascript:void(0);" onclick="openModal('car')">Schedule Now</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="imgBx">
+                        <img src="van.png" alt="van">
+                    </div>
+                    <div class="contentBx">
+                        <h2>Van</h2>
+                        <div class="size">
+                            <h3>Size :</h3>
+                            <span>B</span>
+                        </div>
+                        <a href="javascript:void(0);" onclick="openModal('van')">Schedule Now</a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <div class="imgBx">
+                        <img src="bigcar.png" alt="big car">
+                    </div>
+                    <div class="contentBx">
+                        <h2>Big Car</h2>
+                        <div class="size">
+                            <h3>Size :</h3>
+                            <span>B</span>
+                        </div>
+                        <a href="javascript:void(0);" onclick="openModal('bigCar')">Schedule Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section -->
+    <img src="footer.png" alt="Footer">
+    </section>
+
+
+    <!-- Modal -->
+    <div id="scheduleModal" style="display: none;">
+        <div id="scheduleModalContent">
+            <h2>Schedule Appointment</h2>
+
+            <!-- Full Name Input -->
+            <input id="fullName" type="text" placeholder="Full Name" style="width: 100%; margin-bottom: 10px;">
+
+            <!-- Contact Information -->
+            <input id="appointmentDate" type="date" style="width: 100%; margin-bottom: 10px;">
+            <input id="appointmentTime" type="time" style="width: 100%; margin-bottom: 10px;">
+            <input id="phoneNumber" type="text" placeholder="Cellphone Number" style="width: 100%; margin-bottom: 10px;"
+                oninput="validateCellphoneNumber(this)">
+            <!-- Vehicle Type Selection -->
+            <label for="vehicleType" style="font-size: 12px; display: inline-block; margin-right: 10px;">Select Vehicle
+                Type:</label>
+            <select id="vehicleType" onchange="updatePrice()"
+                style="font-size: 12px; display: inline-block; width: 155px;">
+                <option value="motorcycle">Motorcycle</option>
+                <option value="car">Car</option>
+                <option value="van">Van</option>
+                <option value="bigCar">Big Car</option>
+            </select>
+
+            <!-- Motorcycle Options -->
+            <div id="motorcycleOptions" style="display:none;">
+                <label for="motorcycleSize"
+                    style="font-size: 12px; display: inline-block; margin-right: 10px;">Motorcycle Size:</label>
+                <select id="motorcycleSize" style="font-size: 12px; display: inline-block; width: 150px;">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                </select>
+            </div>
+
+            <!-- Car Options -->
+            <div id="carOptions" style="display:none;">
+                <label for="carSize">Car Size:</label>
+                <select id="carSize" style="font-size: 12px; display: inline-block; width: 150px;">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="big">Big</option>
+                </select>
+            </div>
+
+            <div id="price"></div>
+
+            <!-- Confirm Button -->
+            <button class="confirm-btn" onclick="confirmAppointment()">Confirm</button>
+            <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        // Open the modal with selected vehicle type
+        function openModal(vehicleType) {
+            document.getElementById('scheduleModal').style.display = 'flex';
+            document.getElementById("vehicleType").value = vehicleType;
+            updatePrice();
+        }
+
+        // Close the modal
+        function closeModal() {
+            document.getElementById('scheduleModal').style.display = 'none';
+        }
+
+        // Generate unique ticket code
+        function generateTicketCode() {
+            const date = new Date();
+            const randomPart = Math.random().toString(36).substr(2, 5).toUpperCase();
+            const timestamp = date.getFullYear().toString().slice(-2) +
+                ('0' + (date.getMonth() + 1)).slice(-2) +
+                ('0' + date.getDate()).slice(-2) +
+                ('0' + date.getHours()).slice(-2) +
+                ('0' + date.getMinutes()).slice(-2);
+            return `TICKET-${timestamp}-${randomPart}`;
+        }
+
+        // Confirm appointment details
+        function confirmAppointment() {
+            const fullName = document.getElementById('fullName').value.trim();
+            const appointmentDate = document.getElementById('appointmentDate').value;
+            const appointmentTime = document.getElementById('appointmentTime').value;
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const vehicleType = document.getElementById("vehicleType").value;
+            const price = document.getElementById("price").innerHTML;
+
+            if (fullName && appointmentDate && appointmentTime && phoneNumber) {
+                const ticketCode = generateTicketCode();
+                alert(`Appointment successfully scheduled!\nYour ticket code is: ${ticketCode}\nVehicle: ${vehicleType}\nPrice: ${price}`);
+
+                // Clear inputs after submission
+                document.getElementById('fullName').value = '';
+                document.getElementById('appointmentDate').value = '';
+                document.getElementById('appointmentTime').value = '';
+                document.getElementById('phoneNumber').value = '';
+
+                closeModal();
+            } else {
+                alert("Please fill out all fields before confirming.");
+            }
+        }
+
+        // Update the price based on selected vehicle type and size
+        function updatePrice() {
+            var vehicleType = document.getElementById("vehicleType").value;
+            var priceElement = document.getElementById("price");
+            var motorcycleOptions = document.getElementById("motorcycleOptions");
+            var carOptions = document.getElementById("carOptions");
+
+            motorcycleOptions.style.display = "none";
+            carOptions.style.display = "none";
+
+            if (vehicleType === "motorcycle") {
+                motorcycleOptions.style.display = "block";
+                var size = document.getElementById("motorcycleSize").value;
+                if (size === "small") {
+                    priceElement.innerHTML = "Price: 100 pesos";
+                } else if (size === "medium") {
+                    priceElement.innerHTML = "Price: 140 pesos";
+                }
+            } else if (vehicleType === "car") {
+                carOptions.style.display = "block";
+                var carSize = document.getElementById("carSize").value;
+                if (carSize === "small") {
+                    priceElement.innerHTML = "Price: 120 pesos";
+                } else if (carSize === "medium") {
+                    priceElement.innerHTML = "Price: 180 pesos";
+                } else if (carSize === "big") {
+                    priceElement.innerHTML = "Price: 220 pesos";
+                }
+            } else if (vehicleType === "van" || vehicleType === "bigCar") {
+                priceElement.innerHTML = "Price: 250 pesos";
+            }
+        }
+
+        // Validate phone number input
+        function validateCellphoneNumber(input) {
+            input.value = input.value.replace(/\D/g, '');
+            if (input.value.length > 11) {
+                input.value = input.value.slice(0, 11);
+            }
+        }
+
+        // Update price when dropdown changes
+        document.getElementById("motorcycleSize").addEventListener("change", updatePrice);
+        document.getElementById("carSize").addEventListener("change", updatePrice);
+    </script>
+
+
+
+
+</body>
+
+</html>
